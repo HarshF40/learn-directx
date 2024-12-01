@@ -1,9 +1,28 @@
+//flow
+//--> define a windows procedure (custom)
+//--> define the entry point (int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow))
+//--> register a class (window) using RegisterClassEx(&wc)
+//--> create a instance of the window using CreateWindowEx() which will return a handle
+//--> call the showWindow() to show the window
+//--> run a message loop to keep running the window
+//--> add the messsages
+
+
+
+
+
+
+
+
+
+
 //int main() {
 //	return 0;
 //} this gives an error as this is not the entry point function for the windows application
 //instead we do this
 
 #include<Windows.h> //required to develop apps in windows (no shit)
+#include"WindowsMessageMap.h"
 
 //hInstance: Pointers to structure that hold information about our program
 //hPrevInstance: this always NULL
@@ -13,9 +32,13 @@
 
 //defining a custom windows procedure
 //LRESULT is a 32 bit unsigned integer
-//CALLBACK is a macro here which extends to _stdcall... this a convention to call afunction when interacting windows OS
-//LPARAM AND WPARAN: integer values depends upon the msg
+//CALLBACK is a macro here which extends to _stdcall... this a convention to call a function when interacting windows OS
+//LPARAM AND WPARAM: integer values depends upon the msg
+//LPSTR --> long pointer to string of characters
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+	static WindowsMessageMap mm;
+	OutputDebugStringA( mm(msg, lParam, wParam).c_str() );
+
 	switch (msg) {
 	case WM_CLOSE : PostQuitMessage(69);
 					break;
@@ -68,7 +91,7 @@ int CALLBACK WinMain(HINSTANCE hInstance,
 	HWND hWnd = CreateWindowEx( //this will used to do operation to later on the window
 		0, //exstyle
 		pClassName, //class name
-		L"HEllo", //name of the window
+		L"DirectX", //name of the window
 		WS_OVERLAPPEDWINDOW, //styles or the different functionality of the classes
 		200,200, //position of the window (X,Y)
 		640,480, //width and height of the window
