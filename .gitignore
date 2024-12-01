@@ -1,0 +1,22 @@
+# Visual Studio specific files and folders
+.vs/
+*.vcxproj.user
+*.vcxproj.filters
+
+# Build output and intermediate files
+x64/
+*.obj
+*.pdb
+*.ilk
+*.ipch
+*.tlog
+*.log
+*.pch
+*.idb
+
+# Other temporary or unnecessary files
+*.cache
+*.tmp
+*.suo
+*.userosscache
+*.ide
